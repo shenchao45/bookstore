@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true"></constant>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"></constant>
+    <constant name="struts.action.extension" value="action,,do"></constant>
+    <constant name="struts.i18n.encoding" value="UTF-8"></constant>
+    <constant name="struts.objectFactory" value="spring"/>
+    <package name="shenchao" namespace="/" extends="struts-default">
+        <global-allowed-methods>regex:.*</global-allowed-methods>
+        <action name="login" class="com.shenchao.controller.LoginController" method="login">
+            <result name="success">/success.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="logout" class="com.shenchao.controller.LoginController" method="logout">
+            <result name="success" type="redirect">/index.jsp</result>
+        </action>
+        <action name="register" class="com.shenchao.controller.LoginController" method="register">
+            <result name="success" type="redirect">/index.jsp</result>
+        </action>
+
+        <action name="book_*" class="com.shenchao.controller.BookController" method="{1}">
+            <result name="toList" type="redirect">book_list.action</result>
+            <result name="list">list.jsp</result>
+        </action>
+        <action name="lend_*" class="com.shenchao.controller.LendController" method="{1}">
+            <result name="success">/lend_list.jsp</result>
+        </action>
+    </package>
+</struts>
